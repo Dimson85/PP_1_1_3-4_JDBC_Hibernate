@@ -5,15 +5,29 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
+    private static final String url = "jdbc:mysql://localhost:3306/kata";
+    private static final String userName = "bestuser";
+    private static final String password = "bestuser";
+    private static Connection connect = null;
 
-    public static Connection getMySQLConnection() throws SQLException,
-            ClassNotFoundException {
 
-        String url = "jdbc:mysql://localhost:3306/kata";
-        String dbName = "kata";
-        String userName = "bestuser";
-        String password = "bestuser";
+    public static Connection getMySQLConnection() {
 
-        return DriverManager.getConnection(url, userName, password);
+        try {
+            connect = DriverManager.getConnection(url, userName, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connect;
+    }
+
+    public static void closeMySQLConnection() {
+        if (connect != null) {
+            try {
+                connect.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
