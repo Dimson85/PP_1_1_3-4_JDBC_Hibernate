@@ -22,9 +22,7 @@ public class Main {
 
         userService.cleanUsersTable();
         userService.dropUsersTable();
-        Util.closeMySQLConnection();
-
-
+        Util.closeMySessionFactory();
 
     }
 }
